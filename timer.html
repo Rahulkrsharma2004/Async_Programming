@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMER</title>
+</head>
+<style>
+    /* * {
+        /* margin: 0%; */
+        /* padding: 0%; */ 
+        /* background-color: rgb(171, 233, 233); */
+        /* background: linear-gradient(140deg,#432371,rgb(216, 216, 92)); */
+    /* } */
+
+    /* body {
+        background: linear-gradient(150deg, rgb(226, 131, 7), rgb(234, 231, 236), rgb(35, 240, 7));
+    } */
+
+    /* #inp1 {
+        border-color: blue;
+        font-weight: bold;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+    #inp2 {
+        border-color: blue;
+        font-weight: bold;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+    #inp3 {
+        border-color: blue;
+        font-weight: bold;
+        margin-left: 10px;
+        padding: 5px;
+    }
+
+    #startbtn {
+        background-color: #f8f8f8;
+        flex-direction: column;
+    }
+
+    #stopbtn {
+        background-color: #f8f8f8;
+        flex-direction: column;
+    }
+
+    #resetbtn {
+        background-color: #f8f8f8;
+        flex-direction: column;
+    }
+
+    #startbtn:hover {
+        background-color: #e4d9d9;
+        flex-direction: column;
+    }
+
+    #stopbtn:hover {
+        background-color: #e4d9d9;
+        flex-direction: column;
+    }
+
+    #resetbtn:hover {
+        background-color: #e4d9d9;
+        flex-direction: column;
+    } */
+</style>
+
+<body>
+    <div class="countdown">
+        <div class="timer">
+            <span class="time" id="days">10</span>
+            <span class="label">Days</span>
+        </div>
+        <div class="timer">
+            <span class="time" id="hours">12</span>
+            <span class="label">Hours</span>
+        </div>
+        <div class="timer">
+            <span class="time" id="mins">30</span>
+            <span class="label">Mins</span>
+        </div>
+        <div class="timer">
+            <span class="time" id="secs">12</span>
+            <span class="label">Secs</span>
+        </div>
+    </div>
+</body>
+<script>
+     const days = document.getElementById("days")
+     const hours = document.getElementById("hours")
+     const mins = document.getElementById("mins")
+     const secs = document.getElementById("secs")
+
+    const updateCountDown = (deadline) => {
+        const currentTime = new Date();
+        const timeDifference =  deadline - currentTime;
+        // console.log(timeDifference)
+
+        let caldays = Math.floor(timeDifference / 1000 / 60 / 60 / 60) % 60
+        let calhours = Math.floor(timeDifference / 1000 / 60 /60) % 60
+        let calmins = Math.floor(timeDifference / 1000 / 60) % 60
+        let calsecs = Math.floor(timeDifference / 1000) % 60
+        // console.log(calmins)
+        // console.log(calsecs)
+
+        mins.textContent = formatTime(calmins);
+        secs.textContent = formatTime(calsecs);
+
+        const formatTime = (time) => {
+            return time < 10 ? `0${time}` : time;
+        }
+
+    }
+
+    const countDown = (targetDate) => {
+        setInterval(() => updateCountDown(targetDate),1000)
+    }
+
+    const targetDate = new Date("june 01 2023 07:00")
+    countDown(targetDate)
+</script>
+</html>
