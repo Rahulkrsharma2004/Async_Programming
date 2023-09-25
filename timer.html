@@ -7,121 +7,167 @@
     <title>TIMER</title>
 </head>
 <style>
-    /* * {
-        /* margin: 0%; */
-        /* padding: 0%; */ 
-        /* background-color: rgb(171, 233, 233); */
-        /* background: linear-gradient(140deg,#432371,rgb(216, 216, 92)); */
-    /* } */
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    body{
+        background-color: rgb(56, 54, 54);
+        color: antiquewhite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    .timer{
+        /* background-color: black; */
+        padding: 60px 40px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        
 
-    /* body {
-        background: linear-gradient(150deg, rgb(226, 131, 7), rgb(234, 231, 236), rgb(35, 240, 7));
-    } */
-
-    /* #inp1 {
-        border-color: blue;
+    }
+    .timerDisplay{
+        font-size: 50px;
         font-weight: bold;
-        margin-left: 10px;
-        padding: 5px;
     }
-
-    #inp2 {
-        border-color: blue;
+    .buttons{
+        margin-top: 20px;
+    }
+    .btn{
+        font-size: 15px;
+        background: none;
+        border: none;
+        color: rgb(3, 24, 12);
+        background-color: var(--clr);
+        padding: 10px 20px;
+        margin-inline: 5px;
+        border-radius: 50px;
+        cursor: pointer;
         font-weight: bold;
-        margin-left: 10px;
-        padding: 5px;
     }
-
-    #inp3 {
-        border-color: blue;
+    #hours{
+        padding: 20px;
+        text-align: center;
+        width: 11%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: bold;
-        margin-left: 10px;
-        padding: 5px;
-    }
+        font-size: xx-large;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
 
-    #startbtn {
-        background-color: #f8f8f8;
-        flex-direction: column;
     }
-
-    #stopbtn {
-        background-color: #f8f8f8;
-        flex-direction: column;
+    #minutes{
+        padding: 20px;
+        text-align: center;
+        width: 11%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+        font-size: xx-large;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+       
+       
     }
-
-    #resetbtn {
-        background-color: #f8f8f8;
-        flex-direction: column;
+    #seconds{
+        padding: 20px;
+        text-align: center;
+        width: 11%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+        font-size: xx-large;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
-
-    #startbtn:hover {
-        background-color: #e4d9d9;
-        flex-direction: column;
+    #disp{
+        color: aqua;
     }
-
-    #stopbtn:hover {
-        background-color: #e4d9d9;
-        flex-direction: column;
-    }
-
-    #resetbtn:hover {
-        background-color: #e4d9d9;
-        flex-direction: column;
-    } */
 </style>
 
 <body>
-    <div class="countdown">
-        <div class="timer">
-            <span class="time" id="days">10</span>
-            <span class="label">Days</span>
-        </div>
-        <div class="timer">
-            <span class="time" id="hours">12</span>
-            <span class="label">Hours</span>
-        </div>
-        <div class="timer">
-            <span class="time" id="mins">30</span>
-            <span class="label">Mins</span>
-        </div>
-        <div class="timer">
-            <span class="time" id="secs">12</span>
-            <span class="label">Secs</span>
-        </div>
+    <h1 id="disp">Timer</h1>
+    <div class="timer">
+       
+       <input type="text" id="hours" placeholder="0h" >
+       <!-- <label for="">Hours</label> -->
+       <input type="text" id="minutes" placeholder="0m">
+       <!-- <label for="">Minutes</label> -->
+       <input type="text" id="seconds" placeholder="0s">
+       <!-- <label for="">Seconds</label> -->
+       
+    </div>
+
+    <div class="buttons">
+        <button id="startbtn" class="btn" style="--clr:red">START</button>
+        <button id="stopbtn" class="btn" style="--clr:pink">PAUSE</button>
+        <button id="resetbtn" class="btn" style="--clr:chocolate">RESET</button>
     </div>
 </body>
 <script>
-     const days = document.getElementById("days")
-     const hours = document.getElementById("hours")
-     const mins = document.getElementById("mins")
-     const secs = document.getElementById("secs")
+    let btnStart = document.getElementById("startbtn");
+    let btnStop = document.getElementById("stopbtn");
+    let btnReset = document.getElementById("resetbtn");
 
-    const updateCountDown = (deadline) => {
-        const currentTime = new Date();
-        const timeDifference =  deadline - currentTime;
-        // console.log(timeDifference)
+    let hour = document.getElementById("hours");
+    let minute = document.getElementById("minutes");
+    let second = document.getElementById("seconds");
 
-        let caldays = Math.floor(timeDifference / 1000 / 60 / 60 / 60) % 60
-        let calhours = Math.floor(timeDifference / 1000 / 60 /60) % 60
-        let calmins = Math.floor(timeDifference / 1000 / 60) % 60
-        let calsecs = Math.floor(timeDifference / 1000) % 60
-        // console.log(calmins)
-        // console.log(calsecs)
+    let disp = document.getElementById("disp");
 
-        mins.textContent = formatTime(calmins);
-        secs.textContent = formatTime(calsecs);
+    let interval = null;
+    let total = 0
 
-        const formatTime = (time) => {
-            return time < 10 ? `0${time}` : time;
+    totalValue = () =>{
+        total = Number(hour.value)*3600 + Number(minute.value)*60 + Number(second.value);
+    }
+
+    Timer = () => {
+        totalValue()
+        total--;
+
+        if(total >= 0){
+          var hr = Math.floor(total/3600);
+          var min = Math.floor((total/60) - (hr*60));
+          var sec = total - ((hr*3600) + (min*60))
+
+          hour.value = hr
+          minute.value = min
+          second.value = sec
         }
-
+        else{
+            disp.innerText = "Time Over !!"
+        }
     }
 
-    const countDown = (targetDate) => {
-        setInterval(() => updateCountDown(targetDate),1000)
-    }
 
-    const targetDate = new Date("june 01 2023 07:00")
-    countDown(targetDate)
+    btnStart.addEventListener('click',function(){
+       clearInterval(interval)
+       interval = setInterval(Timer,1000)
+       disp.innerText = "Timer Started"
+    //    console.log("start")
+    })
+
+    btnStop.addEventListener('click',function(){
+        // console.log("stop")
+        clearInterval(interval)
+        disp.innerText = "Timer Paused"
+    })
+
+    btnReset.addEventListener('click',function(){
+        clearInterval(interval)
+       hour.value = "";
+       minute.value = "" ;
+       second.value = "";
+       disp.innerText = "Timer"
+    //    console.log("reset")
+    })
+
 </script>
 </html>
